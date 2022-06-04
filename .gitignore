@@ -1,1 +1,7 @@
 /.metadata/
+/servers
+.settings/
+bin/
+build/
+target
+.DS_Store
