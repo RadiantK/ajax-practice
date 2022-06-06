@@ -25,3 +25,14 @@ ajax는 XMLHttpRequest객체를 통해서 웹 서버와 통신하며 웹 서버�
 
 응답받은 결과를 span태그를 통해 텍스트로 처리할 수 도있고 alert를 통해 경고창을 표시할 수도 있다.  
 XML형식의 결과를 얻어올 때 DOM객체의 getElementsByTagName메소드를 통해 태그값을 배열로 얻어올 수 있다.
+
+
+## 프로젝트
+- ajax01_idcheck : 아이디 중복확인
+- ajax02_comments : 게시물 댓글 추가, 삭제 및 댓글 
+
+## 개발환경
+- EclipseIDE
+- JAVA 11(JDK 11)
+- tomcat(9.0.56)
+- MySQL(8.0.27)
