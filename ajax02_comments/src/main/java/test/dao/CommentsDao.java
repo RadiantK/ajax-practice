@@ -23,8 +23,10 @@ public class CommentsDao {
 		return commentsDao;
 	}
 	
-	public List<Comments> selectList(int reqNum) {
-		String sql = "SELECT * FROM comments WHERE bnum = ?";
+	public List<Comments> selectList(int reqNum, int page) {
+		String sql = "SELECT * FROM ( "
+				+ "SELECT * FROM comments WHERE bnum = ? ORDER BY num DESC) TMP "
+				+ "LIMIT ?, 5;";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -34,6 +36,7 @@ public class CommentsDao {
 			con = DBPool.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, reqNum);
+			pstmt.setInt(2, 0 + (page - 1) * 5);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -97,6 +100,33 @@ public class CommentsDao {
 			return -1;
 		}finally {
 			DBPool.close(con, pstmt);
+		}
+	}
+	
+	public int getCount(int reqNum) {
+		String sql = "SELECT IFNULL(COUNT(num), 0) cnt "
+				+ "FROM comments WHERE bnum = ?";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DBPool.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, reqNum);
+			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			if(rs.next()) {
+				count = rs.getInt("cnt");
+			}
+			
+			return count;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return -1;
+		}finally {
+			DBPool.close(con, pstmt, rs);
 		}
 	}
 }
