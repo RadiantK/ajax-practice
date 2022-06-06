@@ -84,7 +84,7 @@
 					let pageChilds = pageEl.childNodes;
 					for(let i = pageChilds.length-1; i >= 0; i--){
 						let child = pageChilds.item(i);
-						pageEl.removeChild(i);
+						pageEl.removeChild(child);
 					}
 					
 					let startPage = xml.getElementsByTagName('startPage')[0].innerHTML;
