@@ -51,6 +51,7 @@ public class CommentsListController extends HttpServlet {
 			pw.print("</list>");
 		}
 		pw.print("<page>"+page+"</page>");
+		pw.print("<pageCount>"+pageCount+"</pageCount>");
 		pw.print("<startPage>"+startPage+"</startPage>");
 		pw.print("<endPage>"+endPage+"</endPage>");
 		
